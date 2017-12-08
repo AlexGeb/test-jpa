@@ -1,8 +1,13 @@
 package fr.brico.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,14 +25,18 @@ public class Article {
 	@Column
 	private Double prix;
 
-	@Column
-	private Integer id_fou;
+	@ManyToOne
+	@JoinColumn(name = "ID_FOU")
+	private Fournisseur fournisseur;
+
+	@ManyToMany(mappedBy = "articles")
+	private Set<BonCommande> bons;
 
 	@Override
 	public String toString() {
 		StringBuilder strbuilder = new StringBuilder();
 		strbuilder.append("[").append(id).append(" ").append(ref).append(" ").append(designation).append(" ")
-				.append(prix).append(" ").append(id_fou).append("]");
+				.append(prix).append(" ").append(fournisseur.toString()).append("]");
 		return strbuilder.toString();
 	}
 
@@ -63,11 +72,19 @@ public class Article {
 		this.prix = prix;
 	}
 
-	public Integer getId_fou() {
-		return id_fou;
+	public Fournisseur getFournisseur() {
+		return fournisseur;
 	}
 
-	public void setId_fou(Integer id_fou) {
-		this.id_fou = id_fou;
+	public void setFournisseur(Fournisseur fou) {
+		this.fournisseur = fou;
+	}
+
+	public Set<BonCommande> getBons() {
+		return bons;
+	}
+
+	public void setBons(Set<BonCommande> bons) {
+		this.bons = bons;
 	}
 }

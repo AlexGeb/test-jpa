@@ -1,10 +1,16 @@
 package fr.brico.model;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -22,20 +28,24 @@ public class BonCommande {
 	private Integer delai;
 
 	@Column
-	@Type(type = "timestamp")
-	private Date date_cmde;
+	private LocalDate date_cmde;
 
-	@Column
-	private Integer id_fou;
+	@ManyToOne
+	@JoinColumn(name = "ID_FOU")
+	private Fournisseur fournisseur;
+
+	@ManyToMany
+	@JoinTable(name = "COMPO", joinColumns = @JoinColumn(name = "ID_BON", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ID_ART", referencedColumnName = "ID"))
+	private Set<Article> articles;
 
 	@Override
 	public String toString() {
 		StringBuilder strbuilder = new StringBuilder();
 		strbuilder.append("[").append(id).append(" ").append(numero).append(" ").append(delai).append(" ")
-				.append(date_cmde).append("]");
+				.append(date_cmde).append(" ").append(articles.size()).append("]");
 		return strbuilder.toString();
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -60,20 +70,20 @@ public class BonCommande {
 		this.delai = delai;
 	}
 
-	public Date getDate_cmde() {
+	public LocalDate getDate_cmde() {
 		return date_cmde;
 	}
 
-	public void setDate_cmde(Date date_cmde) {
+	public void setDate_cmde(LocalDate date_cmde) {
 		this.date_cmde = date_cmde;
 	}
 
-	public Integer getId_fou() {
-		return id_fou;
+	public Fournisseur getId_fou() {
+		return fournisseur;
 	}
 
-	public void setId_fou(Integer id_fou) {
-		this.id_fou = id_fou;
+	public void setId_fou(Fournisseur fou) {
+		this.fournisseur = fou;
 	}
 
 }

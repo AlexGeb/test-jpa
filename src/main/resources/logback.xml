@@ -23,12 +23,12 @@
 		</encoder>
 	</appender>
 
-	<logger name="fr.brico" level="INFO">
+	<logger name="fr.brico" level="INFO" additivity="false">
 		<appender-ref ref="NONE" />
 	</logger>
 
 	<!-- règle de logs par défaut. Ici : niveau ERROR vers la sortie FILE -->
-	<root level="ERROR">
+	<root level="OFF">
 		<appender-ref ref="FILE" />
 	</root>
 </configuration>
