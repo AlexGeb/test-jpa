@@ -13,8 +13,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
-
 @Entity
 @Table(name = "bon")
 public class BonCommande {
@@ -78,12 +76,19 @@ public class BonCommande {
 		this.date_cmde = date_cmde;
 	}
 
-	public Fournisseur getId_fou() {
+	public Fournisseur getFournisseur() {
 		return fournisseur;
 	}
 
-	public void setId_fou(Fournisseur fou) {
+	public void setFournisseur(Fournisseur fou) {
 		this.fournisseur = fou;
 	}
+	
+	public Set<Article> getArticles() {
+		return articles;
+	}
 
+	public void setArticles(Set<Article> arts) {
+		this.articles = arts;
+	}
 }

@@ -21,6 +21,12 @@ public class TestJpa {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dta-test-jpa");
 		EntityManager em = emf.createEntityManager();
 		
+		BonCommande bon = em.find(BonCommande.class, 1);
+		if(bon!=null) {
+			LOGGER.info(bon.getArticles().toString());
+		}
+		
+		/*
 		//Articles
 		TypedQuery<Article> res = em.createQuery("select a from Article a", Article.class);
 		if (res != null) {
@@ -47,6 +53,7 @@ public class TestJpa {
 				LOGGER.info(b.toString());
 			}
 		}
+		*/
 
 		em.close();
 		emf.close();
