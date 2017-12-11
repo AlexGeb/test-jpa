@@ -19,7 +19,7 @@
 
 	<persistence-unit name="dta-tp4-jpa" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		
+		  
 		<class>fr.banque.model.Client</class>
 		<class>fr.banque.model.Banque</class>
 		<class>fr.banque.model.Compte</class>
